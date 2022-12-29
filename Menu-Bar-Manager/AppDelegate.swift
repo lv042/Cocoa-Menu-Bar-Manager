@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let menu = NSMenu()
 
         // 2
-        let one = NSMenuItem(title: "Ich", action: #selector(didTapOne) , keyEquivalent: "1")
+        let one = NSMenuItem(title: "Show Desktop", action: #selector(didTapOne) , keyEquivalent: "1")
         menu.addItem(one)
 
         let two = NSMenuItem(title: "bin", action: #selector(didTapTwo) , keyEquivalent: "2")
@@ -47,6 +47,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         @objc func didTapOne() {
             changeStatusBarButton(number: 1)
+            
+            let currentApplication = NSRunningApplication.current
+            let runningApplications = NSWorkspace.shared.runningApplications
+            for application in runningApplications {
+                if application != currentApplication {
+                    application.hide()
+                }
+            }
+
         }
 
         @objc func didTapTwo() {
